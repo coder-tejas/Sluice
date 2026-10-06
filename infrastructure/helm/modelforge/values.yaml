@@ -1,0 +1,28 @@
+# Scaffold values — tuned per environment later.
+global:
+  imageRegistry: "" # e.g. <account>.dkr.ecr.<region>.amazonaws.com (set per env)
+  imageTag: "0.1.0"
+
+api:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: "Sluice/api"
+
+router:
+  enabled: false
+  replicaCount: 1
+  image:
+    repository: "Sluice/router"
+
+inferenceWorker:
+  enabled: false
+  replicaCount: 1
+  image:
+    repository: "Sluice/inference-worker"
+
+evaluationWorker:
+  enabled: false
+  replicaCount: 1
+  image:
+    repository: "Sluice/evaluation-worker"

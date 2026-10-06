@@ -1,0 +1,22 @@
+# Scaffold Deployment for the inference worker (not implemented yet).
+{{- if .Values.inferenceWorker.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "Sluice.fullname" . }}-inference-worker
+  labels:
+    {{- include "Sluice.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.inferenceWorker.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: inference-worker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: inference-worker
+    spec:
+      containers:
+        - name: inference-worker
+          image: "{{ .Values.inferenceWorker.image.repository }}:{{ .Values.global.imageTag }}"
+{{- end }}

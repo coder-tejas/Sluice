@@ -1,0 +1,22 @@
+# Scaffold Deployment for the router (not implemented yet).
+{{- if .Values.router.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "Sluice.fullname" . }}-router
+  labels:
+    {{- include "Sluice.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.router.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: router
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: router
+    spec:
+      containers:
+        - name: router
+          image: "{{ .Values.router.image.repository }}:{{ .Values.global.imageTag }}"
+{{- end }}

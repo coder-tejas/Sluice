@@ -1,0 +1,9 @@
+# TEMPLATE ONLY — example model configuration, not wired to any code.
+model:
+  name: fraud
+  version: "0.1.0"
+serving:
+  replicas: 1
+  accelerator: cpu # cpu | cuda (set per deployment)
+evaluation:
+  dataset: datasets/evaluation/fraud.jsonl # placeholder path

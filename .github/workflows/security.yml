@@ -1,0 +1,9 @@
+name: security
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Future: gitleaks secret scan, Trivy filesystem/container scans.
+      - run: echo "security scaffolding — scanners land with the first image builds"

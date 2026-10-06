@@ -1,0 +1,15 @@
+[project]
+name = "Sluice-client"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["Sluice-common", "httpx>=0.27"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.uv.sources]
+Sluice-common = { workspace = true }

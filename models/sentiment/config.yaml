@@ -1,0 +1,9 @@
+# TEMPLATE ONLY — example model configuration, not wired to any code.
+model:
+  name: sentiment
+  version: "0.1.0"
+serving:
+  replicas: 1
+  accelerator: cpu # cpu | cuda (set per deployment)
+evaluation:
+  dataset: datasets/evaluation/sentiment.jsonl # placeholder path

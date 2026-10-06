@@ -1,0 +1,8 @@
+# Alert rule scaffolding (no real rules yet — SLOs defined per service later).
+#
+# groups:
+#   - name: Sluice-slo
+#     rules:
+#       - alert: HighErrorRate
+#         expr: job:request_errors:ratio5m > 0.01
+#         for: 5m

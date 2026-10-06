@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+*.db
+*.sqlite*
+.pytest_cache/
+.ruff_cache/
+
+# Node / Next.js
+node_modules/
+dist/
+.next/
+out/
+*.tsbuildinfo
+pnpm-debug.log*
+.npm/
+
+# Docker
+.docker/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+!example.tfvars
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+
+# Kubernetes
+*.kube/
+kubeconfig
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db
+
+# Model artifacts / data (never commit weights or raw data)
+*.pkl
+*.pt
+*.pth
+*.bin
+*.onnx
+*.safetensors
+mlruns/
+datasets/raw/
+datasets/processed/
+*.parquet
+*.csv
+!**/example.*
+
+# Logs / cache
+*.log
+.cache/

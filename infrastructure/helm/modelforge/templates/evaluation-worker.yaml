@@ -1,0 +1,22 @@
+# Scaffold Deployment for the evaluation worker (not implemented yet).
+{{- if .Values.evaluationWorker.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "Sluice.fullname" . }}-evaluation-worker
+  labels:
+    {{- include "Sluice.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.evaluationWorker.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: evaluation-worker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: evaluation-worker
+    spec:
+      containers:
+        - name: evaluation-worker
+          image: "{{ .Values.evaluationWorker.image.repository }}:{{ .Values.global.imageTag }}"
+{{- end }}

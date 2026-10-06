@@ -1,0 +1,10 @@
+name: python
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      # Future: uv sync, pytest (unit/integration), ruff lint + format.
+      - run: python -m compileall apps packages -q

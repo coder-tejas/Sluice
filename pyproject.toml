@@ -1,0 +1,11 @@
+[project]
+name = "Sluice"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["apps/api", "packages/python/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,9 @@
+# Shared non-secret configuration (scaffold — values are placeholders).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: Sluice-config
+  namespace: Sluice
+data:
+  ENVIRONMENT: "dev"
+  LOG_LEVEL: "info"

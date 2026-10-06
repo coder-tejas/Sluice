@@ -1,0 +1,10 @@
+# Default-deny style network policy scaffold (rules land with real services).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: Sluice
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
