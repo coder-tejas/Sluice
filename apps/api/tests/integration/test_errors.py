@@ -6,7 +6,7 @@ from app.core.errors import (
     unhandled_exception_handler,
     validation_exception_handler,
 )
-from app.middleware.request_id import RequestIDMiddleware
+from app.core.middleware import RequestIDMiddleware
 
 
 def create_test_app():

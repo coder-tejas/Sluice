@@ -1,7 +1,7 @@
 import structlog
 
 from fastapi import Request
-from fastapi.exception import RequestValidationError
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException
 from starlette.status import (
@@ -9,7 +9,7 @@ from starlette.status import (
     HTTP_500_INTERNAL_SERVER_ERROR,
 )
 
-logger = stuctlog.get_logger("sluice.errors")
+logger = structlog.get_logger("sluice.errors")
 
 async  def http_exception_handler(
     request:Request,
@@ -17,7 +17,7 @@ async  def http_exception_handler(
 ):
     request_id = getattr(
         request.state,
-        "request.id",
+        "request_id",
         None
     )
     
@@ -53,7 +53,7 @@ async def validation_exception_handler(
         },
     )
     
-async def unhandled_exception_handled(
+async def unhandled_exception_handler(
     request:Request,
     exc:Exception
 ):
@@ -71,7 +71,7 @@ async def unhandled_exception_handled(
         content = {
             "error" : {
                 "code" : "INTERNAL_SERVER_ERROR",
-                "message" : "An unexcepted error occurred",
+                "message" : "An unexpected error occurred",
                 "request_id" : request_id,
             }
         },

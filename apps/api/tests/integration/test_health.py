@@ -16,7 +16,7 @@ def test_health():
     
 def test_readiness():
     response = client.get(
-        "v1/health/ready"
+        "/v1/health/ready"
     )
     assert response.status_code == 200
     
@@ -37,4 +37,4 @@ def test_openapi():
     assert data["info"]["version"] == "0.1.0"
     
     assert "/v1/health" in data["paths"]
-    assert "v1/health/ready" in data["paths"]
+    assert "/v1/health/ready" in data["paths"]

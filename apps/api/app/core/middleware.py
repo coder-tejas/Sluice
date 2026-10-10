@@ -28,9 +28,7 @@ class RequestIDMiddleware(BaseHTTPMiddleware):
         try:
             response = await call_next(request)
             
-            duration_ms = (
-                time.perf_counter() - start,
-            ) * 1000
+            duration_ms = (time.perf_counter() - start) * 1000
             
             logger.info(
                 "http_request",
