@@ -7,6 +7,7 @@ from starlette.exceptions import HTTPException
 
 from app.api.v1.router import router as v1_router
 from app.core.config import get_settings
+from app.core.database_async import async_engine, check_async_connection
 from app.core.errors import (
     http_exception_handler,
     unhandled_exception_handler,
@@ -32,7 +33,14 @@ async def lifespan(app: FastAPI):
         version = settings.app_version,
         environment = settings.environment,
     )
+    try:
+        assert await check_async_connection() == 1
+    except Exception:
+        logger.error("database_unreachable_at_startup")
+        raise
+    logger.info("database_connected")
     yield
+    await async_engine.dispose()
     logger.info(
         "application_stopping"
     )
