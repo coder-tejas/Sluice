@@ -1,10 +1,7 @@
-from fastapi.testclient import TestClient
-
 from app.main import app
 
-client = TestClient(app)
 
-def test_request_id_is_generated():
+def test_request_id_is_generated(client):
     response = client.get(
         "/v1/health"
     )
@@ -18,7 +15,7 @@ def test_request_id_is_generated():
     assert request_id is not None
     assert len(request_id) > 0
     
-def test_request_id_is_preserved():
+def test_request_id_is_preserved(client):
     request_id = "test_req-123"
     response = client.get(
         "/v1/health",
@@ -35,7 +32,7 @@ def test_request_id_is_preserved():
     ] == request_id
 
 
-def test_request_id_is_present_on_404():
+def test_request_id_is_present_on_404(client):
     request_id = "missing-route-123"
     
     response = client.get(

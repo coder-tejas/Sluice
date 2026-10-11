@@ -1,9 +1,7 @@
-from fastapi.testclient import TestClient
 from app.main import app
 
-client = TestClient(app)
 
-def test_health():
+def test_health(client):
     response = client.get(
         "/v1/health"
     )
@@ -14,7 +12,7 @@ def test_health():
         "status" : "ok"
     }
     
-def test_readiness():
+def test_readiness(client):
     response = client.get(
         "/v1/health/ready"
     )
@@ -24,7 +22,7 @@ def test_readiness():
         "status" : "ready",
     }
     
-def test_openapi():
+def test_openapi(client):
     response  = client.get(
         "/openapi.json"
     )
