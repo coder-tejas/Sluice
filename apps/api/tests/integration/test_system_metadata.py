@@ -14,15 +14,18 @@ def run(coro):
 
 
 async def _reset():
+    # Schema is owned by Alembic migrations; ensure it exists and clear rows.
     await async_engine.dispose()
     async with async_engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
+    async with AsyncSessionLocal() as s:
+        await s.execute(text("DELETE FROM system_metadata"))
+        await s.commit()
 
 
 async def _drop():
     async with AsyncSessionLocal() as s:
-        await s.execute(text("DROP TABLE IF EXISTS system_metadata"))
+        await s.execute(text("DELETE FROM system_metadata"))
         await s.commit()
     await async_engine.dispose()
 

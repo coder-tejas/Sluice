@@ -14,6 +14,25 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U Sluice -d Sluice"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Control-plane API. Needs SLUICE_DATABASE_URL at runtime; schema changes
+  # go through Alembic (apps/api/alembic), never create_all at startup.
+  api:
+    build: ./apps/api
+    environment:
+      SLUICE_ENVIRONMENT: development
+      SLUICE_LOG_LEVEL: INFO
+      SLUICE_DATABASE_URL: postgresql://Sluice:Sluice@postgres:5432/Sluice
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   # -> ElastiCache (Redis) in production
   redis:
