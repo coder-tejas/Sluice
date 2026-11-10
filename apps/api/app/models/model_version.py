@@ -1,4 +1,3 @@
-"""Immutable version of a registered model."""
 
 from datetime import datetime
 from typing import TYPE_CHECKING, Any

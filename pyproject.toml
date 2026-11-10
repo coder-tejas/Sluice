@@ -5,7 +5,7 @@ requires-python = ">=3.12"
 dependencies = []
 
 [tool.uv.workspace]
-members = ["apps/api", "packages/python/*"]
+members = ["apps/api", "apps/router", "packages/python/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

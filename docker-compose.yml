@@ -34,6 +34,32 @@ services:
       postgres:
         condition: service_healthy
 
+  # OpenAI-compatible gateway (data plane). No database dependency.
+  router:
+    build: ./apps/router
+    environment:
+      SLUICE_WORKER_URL: http://llama-server:8080
+      SLUICE_MODEL_ID: qwen2.5-0.5b-instruct
+      SLUICE_UPSTREAM_TIMEOUT: "300"
+    ports:
+      - "8001:8001"
+    depends_on:
+      llama-server:
+        condition: service_healthy
+
+  # P0 inference worker: real llama.cpp, model baked into the image.
+  llama-server:
+    build: ./docker/llama
+    ports:
+      - "8080:8080"
+    healthcheck:
+      # 503 while loading the model, 200 when ready.
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 60
+      start_period: 30s
+
   # -> ElastiCache (Redis) in production
   redis:
     image: redis:7

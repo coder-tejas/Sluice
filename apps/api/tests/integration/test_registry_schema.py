@@ -1,4 +1,3 @@
-"""Registry schema: relationships and database constraints on real Postgres."""
 
 import asyncio
 
